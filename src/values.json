@@ -1,0 +1,63 @@
+{
+    "rounded": {
+        "colours": {
+            "primary": {
+                "teal": {
+                    "main": "#009788",
+                    "hover": "#00645a"
+                },
+                "purple": {
+                    "main": "#4a148c",
+                    "hover": "#3e1275"
+                },
+                "orange": {
+                    "main": "#f57c00",
+                    "hover": "#d66d02"
+                }
+            },
+            "background": {
+                "dark": {
+                    "main": "#22272e",
+                    "highlight": "#1c2128"
+                },
+                "light": {
+                    "main": "#f5f5f5",
+                    "highlight": "#dedede"
+                }
+            },
+            "statuses": {
+                "success": {
+                    "main": "#27ea60",
+                    "hover": "#1bab45"
+                },
+                "warning": {
+                    "main": "#e67e22",
+                    "hover": "#ab5e1a"
+                },
+                "danger": {
+                    "main": "#c0392b",
+                    "hover": "#9c2e22"
+                }
+            }
+        },
+        "text": {
+            "font": "Roboto"
+        },
+        "components": {
+            "info": "All the text in buttons should be capitalised and either black or white depending on which contrasts better with the background color.",
+            "hr": {
+                "name": "Horizontal Rule",
+                "info": "The horizontal rule is used to separate sections of content. It should be used sparingly and only when necessary.",
+                "height": "3px"
+            }
+        }
+    },
+    "sharp": {
+        "colours": {
+            "primary": {},
+            "highlight": {},
+            "background": {},
+            "buttons": {}
+        }
+    }
+}
