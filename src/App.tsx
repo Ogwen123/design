@@ -13,17 +13,21 @@ import { values } from "./exports/values"
 //}
 
 type PossibleKeys = "primary" | "background" | "statuses"
-type PossibleColours = "teal" | "purple" | "orange"
+type PossibleColoursPrimary = "teal" | "purple" | "orange"
+type PossibleColoursBG = "dark" | "light"
+type PossibleColoursStatus = "success" | "warning" | "danger"
 
 const App = () => {
     const [selectedTab, setSelectedTab] = React.useState<"rounded" | "sharp">('rounded');
     const [selectedSection, setSelectedSection] = React.useState<"colours" | "components" | "text">("colours")
 
     const handleStyleChange = (event: React.MouseEvent<HTMLElement>, tab: "rounded" | "sharp") => {
+        event = event
         setSelectedTab(tab);
     }
 
     const handleSectionChange = (event: React.MouseEvent<HTMLElement>, tab: "colours" | "components" | "text") => {
+        event = event
         setSelectedSection(tab);
     }
 
@@ -59,16 +63,16 @@ const App = () => {
                 </ToggleButtonGroup>
                 <Box id="tab-body-colours" sx={{ display: (selectedSection === "colours" ? "flex" : "none"), ...styles.tabBody }} >
                     <Box id="colour-info" sx={{ fontSize: "18px" }}>{(values.colours.info) as string}</Box>
-                    {
-                        Object.keys(values.colours).map((level, index) => {
+                    {/*
+                        Object.keys(values.colours).map((level, 0) => {
                             if (level === "info") return
                             return (
-                                <Box id="colour-section" key={"colour-section" + index}>
-                                    <Box id="colour-info" key={"colour-title" + index} sx={{
+                                <Box id="colour-section" key={"colour-section" + 0}>
+                                    <Box id="colour-info" key={"colour-title" + 0} sx={{
                                         fontSize: "20px",
                                         marginTop: "20px"
                                     }}>{capitalise(level)}</Box>
-                                    <Box id="colour-info" key={"colour-info" + index} >{values.colours[level as PossibleKeys].info}</Box>
+                                    <Box id="colour-info" key={"colour-info" + 0} >{values.colours[level as PossibleKeys].info}</Box>
                                     <Grid
                                         container
                                         id="colour-tiles"
@@ -78,10 +82,11 @@ const App = () => {
                                         }}
                                     >
                                         {
-                                            Object.keys(values.colours[level as PossibleKeys]).map((colour, index) => {
+                                            Object.keys(values.colours[level as PossibleKeys]).map((colour, 0) => {
                                                 if (colour === "info") return
+                                                const colourGroup = values.colours[level as PossibleKeys]
                                                 return (
-                                                    <Grid item key={"colour-group-" + colour} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={values.colours[level as PossibleKeys][colour as PossibleColours]} name={colour} /></Grid>
+                                                    <Grid item key={"colour-group-" + 0} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursPrimary | PossibleColoursBG | PossibleColoursStatus]} name={colour} /></Grid>
                                                 )
                                             })
                                         }
@@ -89,7 +94,84 @@ const App = () => {
                                 </Box>
                             )
                         })
-                    }
+                    */}
+                    <Box id="colour-section-primary" key={"colour-section" + 0}>
+                        <Box id="colour-info" key={"colour-title" + 0} sx={{
+                            fontSize: "20px",
+                            marginTop: "20px"
+                        }}>{capitalise("primary")}</Box>
+                        <Box id="colour-info" key={"colour-info" + 0} >{values.colours.primary.info}</Box>
+                        <Grid
+                            container
+                            id="colour-tiles"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row"
+                            }}
+                        >
+                            {
+                                Object.keys(values.colours.primary).map((colour, index) => {
+                                    if (colour === "info") return
+                                    const colourGroup = values.colours.primary
+                                    return (
+                                        <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursPrimary]} name={colour} /></Grid>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </Box>
+
+                    <Box id="colour-section-background" key={"colour-section" + 1}>
+                        <Box id="colour-info" key={"colour-title" + 1} sx={{
+                            fontSize: "20px",
+                            marginTop: "20px"
+                        }}>{capitalise("background")}</Box>
+                        <Box id="colour-info" key={"colour-info" + 1} >{values.colours.background.info}</Box>
+                        <Grid
+                            container
+                            id="colour-tiles"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row"
+                            }}
+                        >
+                            {
+                                Object.keys(values.colours["background" as PossibleKeys]).map((colour, index) => {
+                                    if (colour === "info") return
+                                    const colourGroup = values.colours.background
+                                    return (
+                                        <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursBG]} name={colour} /></Grid>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </Box>
+
+                    <Box id="colour-section-statuses" key={"colour-section" + 2}>
+                        <Box id="colour-info" key={"colour-title" + 2} sx={{
+                            fontSize: "20px",
+                            marginTop: "20px"
+                        }}>{capitalise("statuses")}</Box>
+                        <Box id="colour-info" key={"colour-info" + 2} >{values.colours.statuses.info}</Box>
+                        <Grid
+                            container
+                            id="colour-tiles"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row"
+                            }}
+                        >
+                            {
+                                Object.keys(values.colours["statuses" as PossibleKeys]).map((colour, index) => {
+                                    if (colour === "info") return
+                                    const colourGroup = values.colours.statuses
+                                    return (
+                                        <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursStatus]} name={colour} /></Grid>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </Box>
                 </Box>
                 <Box id="tab-body-text" sx={{ display: (selectedSection === "text" ? "flex" : "none") }} ></Box>
                 <Box id="tab-body-components" sx={{ display: (selectedSection === "components" ? "flex" : "none") }} >

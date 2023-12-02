@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import { IconButton } from "@mui/material"
@@ -26,6 +26,7 @@ const ColourTile = ({ colour, name }: ColourTileProps) => {
     }
 
     const handleCopy = (event: React.MouseEvent<HTMLButtonElement>, hex: string) => {
+        event = event
         navigator.clipboard.writeText(hex)
         alert("Copied text to clipboard!")
     }
