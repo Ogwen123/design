@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { ToggleButtonGroup, ToggleButton, Grid } from '@mui/material';
+import { ToggleButtonGroup, ToggleButton, Grid, Button } from '@mui/material';
 import { Box } from "@mui/system";
 
 import ColourTile from './components/ColourTile';
 
 import styles from './exports/styles';
 import { values } from "./exports/values"
+import CssSnippet from './components/CssSnippet';
 
 //type Values = {
 //    [key: string]: Record<string, Record<string, Record<string, Record<string, Record<string, string> | string> | string> | string> | string> // ik its disgusting
@@ -18,12 +19,12 @@ type PossibleColoursBG = "dark" | "light"
 type PossibleColoursStatus = "success" | "warning" | "danger"
 
 const App = () => {
-    const [selectedTab, setSelectedTab] = React.useState<"rounded" | "sharp">('rounded');
+    const [selectedStyle, setselectedStyle] = React.useState<"rounded" | "sharp">('rounded');
     const [selectedSection, setSelectedSection] = React.useState<"colours" | "components" | "text">("colours")
 
     const handleStyleChange = (event: React.MouseEvent<HTMLElement>, tab: "rounded" | "sharp") => {
         event = event
-        setSelectedTab(tab);
+        setselectedStyle(tab);
     }
 
     const handleSectionChange = (event: React.MouseEvent<HTMLElement>, tab: "colours" | "components" | "text") => {
@@ -33,6 +34,10 @@ const App = () => {
 
     const capitalise = (str: string) => {
         return str[0].toUpperCase() + str.substring(1).toLowerCase()
+    }
+    const sectionBarDynamicStyle = {
+        borderBottomLeftRadius: (selectedSection === "components" ? "0px" : ""),
+        borderBottomRightRadius: (selectedSection === "components" ? "0px" : ""),
     }
 
     return (
@@ -53,48 +58,36 @@ const App = () => {
                     exclusive
                     onChange={handleSectionChange}
                     aria-label="Section"
-                    sx={{
-                        width: "100%"
-                    }}
+                    sx={{ width: "100%" }}
                 >
-                    <ToggleButton value="colours" sx={styles.tabSelectorStyle} > Colours </ToggleButton>
-                    <ToggleButton value="components" sx={styles.tabSelectorStyle} > Components </ToggleButton>
-                    <ToggleButton value="text" sx={styles.tabSelectorStyle} > Text </ToggleButton>
+                    <ToggleButton value="colours" sx={{
+                        ...sectionBarDynamicStyle,
+                        ...styles.tabSelector
+                    }}
+                    > Colours </ToggleButton>
+                    <ToggleButton value="components" sx={{
+                        ...sectionBarDynamicStyle,
+                        ...styles.tabSelector
+                    }}
+                    > Components </ToggleButton>
+                    <ToggleButton value="text" sx={{
+                        ...sectionBarDynamicStyle,
+                        ...styles.tabSelector
+                    }}
+                    > Text </ToggleButton>
                 </ToggleButtonGroup>
                 <Box id="tab-body-colours" sx={{ display: (selectedSection === "colours" ? "flex" : "none"), ...styles.tabBody }} >
+                    <Box
+                        id="colour-info"
+                        sx={{
+                            fontSize: "25px",
+                            display: "flex",
+                            justifyContent: "center",
+                            textDecoration: "underline"
+                        }}>
+                        Make sure you turn off any dark mode exentions to see the colours properly.
+                    </Box>
                     <Box id="colour-info" sx={{ fontSize: "18px" }}>{(values.colours.info) as string}</Box>
-                    {/*
-                        Object.keys(values.colours).map((level, 0) => {
-                            if (level === "info") return
-                            return (
-                                <Box id="colour-section" key={"colour-section" + 0}>
-                                    <Box id="colour-info" key={"colour-title" + 0} sx={{
-                                        fontSize: "20px",
-                                        marginTop: "20px"
-                                    }}>{capitalise(level)}</Box>
-                                    <Box id="colour-info" key={"colour-info" + 0} >{values.colours[level as PossibleKeys].info}</Box>
-                                    <Grid
-                                        container
-                                        id="colour-tiles"
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "row"
-                                        }}
-                                    >
-                                        {
-                                            Object.keys(values.colours[level as PossibleKeys]).map((colour, 0) => {
-                                                if (colour === "info") return
-                                                const colourGroup = values.colours[level as PossibleKeys]
-                                                return (
-                                                    <Grid item key={"colour-group-" + 0} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursPrimary | PossibleColoursBG | PossibleColoursStatus]} name={colour} /></Grid>
-                                                )
-                                            })
-                                        }
-                                    </Grid>
-                                </Box>
-                            )
-                        })
-                    */}
                     <Box id="colour-section-primary" key={"colour-section" + 0}>
                         <Box id="colour-info" key={"colour-title" + 0} sx={{
                             fontSize: "20px",
@@ -174,11 +167,11 @@ const App = () => {
                     </Box>
                 </Box>
                 <Box id="tab-body-text" sx={{ display: (selectedSection === "text" ? "flex" : "none") }} ></Box>
-                <Box id="tab-body-components" sx={{ display: (selectedSection === "components" ? "flex" : "none") }} >
+                <Box id="tab-body-components" sx={{ display: (selectedSection === "components" ? "flex" : "none"), ...styles.tabBody, paddingTop: "0" }} >
                     <ToggleButtonGroup
                         id="top-bar-2"
                         color="primary"
-                        value={selectedTab}
+                        value={selectedStyle}
                         exclusive
                         onChange={handleStyleChange}
                         aria-label="Style"
@@ -186,9 +179,39 @@ const App = () => {
                             width: "100%"
                         }}
                     >
-                        <ToggleButton value="rounded" sx={styles.tabSelectorStyle} >Rounded</ToggleButton>
-                        <ToggleButton value="sharp" sx={styles.tabSelectorStyle} >Sharp</ToggleButton>
+                        <ToggleButton value="rounded" sx={{ ...styles.tabSelector, ...styles.styleBar }} >Rounded</ToggleButton>
+                        <ToggleButton value="sharp" sx={{ ...styles.tabSelector, ...styles.styleBar }} >Sharp</ToggleButton>
                     </ToggleButtonGroup>
+                    <Box id="tab-body-components-rounded" sx={{ display: (selectedStyle === "rounded" ? "flex" : "none"), ...styles.tabBody }}>
+                        <Box id="components-rounded-section">
+                            <Box sx={{
+                                fontSize: "25px"
+                            }}>Buttons</Box>
+                            <Box>
+                                <ul>
+                                    <li>Border radius: 5px</li>
+                                    <li>Padding should be {">"}10px</li>
+                                </ul>
+                                <Button sx={styles.exampleButton1}>Example</Button>
+                                <CssSnippet code={values.components.rounded.buttons.css}></CssSnippet>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box id="tab-body-components-sharp" sx={{ display: (selectedStyle === "sharp" ? "flex" : "none"), ...styles.tabBody }}>
+                        <Box id="components-sharp-section">
+                            <Box sx={{
+                                fontSize: "25px"
+                            }}>Buttons</Box>
+                            <Box>
+                                <ul>
+                                    <li>Border radius: 0px</li>
+                                    <li>Padding should be {">"}10px</li>
+                                </ul>
+                                <Button sx={styles.exampleButton1}>Example</Button>
+                                <CssSnippet code={values.components.sharp.buttons.css}></CssSnippet>
+                            </Box>
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         </div >

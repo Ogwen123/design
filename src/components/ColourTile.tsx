@@ -77,7 +77,7 @@ const ColourTile = ({ colour, name }: ColourTileProps) => {
                     }}>
                     <IconButton
                         sx={styles.copyButton}
-                        onClick={(e) => handleCopy(e, colour.main)}
+                        onClick={(e) => handleCopy(e, colour.dark)}
                     >
                         <ContentCopyOutlinedIcon sx={{ color: (name === "light" ? "black" : "#dedede") }} />
                     </IconButton>

@@ -1,5 +1,10 @@
-const tabSelectorStyle = {
-    width: "50%"
+const tabSelector = {
+    width: "51%"
+}
+
+const styleBar = {
+    borderTopLeftRadius: "0px",
+    borderTopRightRadius: "0px",
 }
 
 const tabBody = {
@@ -39,6 +44,28 @@ const copyButton = {
     padding: "0px",
     width: "30px",
     height: "30px",
+    margin: "5px"
 }
 
-export default { tabSelectorStyle, tabBody, colourInfo, colourTile, similarColourChip, colourChip, copyButton }
+const exampleButton1 = {
+    borderRadius: "5px",
+    background: "#009788",
+    color: "white",
+    padding: "10px",
+    "&:hover": {
+        background: "#00645a",
+        color: "white"
+    }
+}
+
+const codeSnippet = {
+    background: "#dedede",
+    whiteSpace: "pre-wrap",
+    padding: "10px",
+    paddingTop: "20px",
+    paddingBottom: "20px",
+    marginTop: "20px",
+    borderRadius: "5px"
+}
+
+export default { tabSelector, tabBody, colourInfo, colourTile, similarColourChip, colourChip, copyButton, styleBar, exampleButton1, codeSnippet }

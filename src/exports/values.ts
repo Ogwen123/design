@@ -31,7 +31,7 @@ export const values = {
             "info": "The status colours should be used to colour alerts. Also, the warning and danger colours can be used to colour buttons that a user should be careful about pressing.",
             "success": {
                 "main": "#27ea60",
-                "dark": "#1bab45"
+                "dark": "#1bab45",
             },
             "warning": {
                 "main": "#e67e22",
@@ -53,7 +53,15 @@ export const values = {
             "info": "The horizontal rule is used to separate sections of content. It should be used sparingly and only when necessary.",
             "height": "3px"
         },
-        "rounded": {},
-        "sharp": {}
+        "rounded": {
+            "buttons": {
+                "css": '.button{| borderRadius: "5px",| background: PRIMARY_COLOUR,| color: "white",| padding: "10px"| }| .button:hover {| background: PRIMARY_COLOUR,| color: "white"| }|'
+            }
+        },
+        "sharp": {
+            "buttons": {
+                "css": '.button {| background: PRIMARY_COLOUR,| color: "white",| padding: "10px"| }| .button:hover {| background: PRIMARY_COLOUR,| color: "white"| }|'
+            }
+        }
     }
 }
