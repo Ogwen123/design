@@ -14,6 +14,10 @@ export const values = {
             "orange": {
                 "main": "#f57c00",
                 "dark": "#d66d02"
+            },
+            "blue": {
+                "main": "#2563eb",
+                "dark": "#1b46a6"
             }
         },
         "background": {
