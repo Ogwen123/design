@@ -8,6 +8,7 @@ import ColourTile from './components/ColourTile';
 import styles from './exports/styles';
 import { values } from "./exports/values"
 import CssSnippet from './components/CssSnippet';
+import GradientTile from './components/GradientTile';
 
 //type Values = {
 //    [key: string]: Record<string, Record<string, Record<string, Record<string, Record<string, string> | string> | string> | string> | string> // ik its disgusting
@@ -17,6 +18,7 @@ type PossibleKeys = "primary" | "background" | "statuses"
 type PossibleColoursPrimary = "teal" | "purple" | "orange"
 type PossibleColoursBG = "dark" | "light"
 type PossibleColoursStatus = "success" | "warning" | "danger"
+type PossibleColoursGradient = "0" | "1" | "2" | "3" | "4"
 
 const App = () => {
     const [selectedStyle, setselectedStyle] = React.useState<"rounded" | "sharp">('rounded');
@@ -135,15 +137,19 @@ const App = () => {
                                 >
                                     {
                                         Object.keys(values.colours.primary).map((colour, index) => {
-                                            if (colour === "info") return
+                                            if (colour === "info" || colour === "type") return
                                             const colourGroup = values.colours.primary
                                             return (
-                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursPrimary]} name={colour} /></Grid>
+                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}>
+                                                    <ColourTile colour={colourGroup[colour as PossibleColoursPrimary]} name={colour} />
+                                                </Grid>
                                             )
                                         })
                                     }
                                 </Grid>
                             </Box>
+
+
 
                             <Box id="colour-section-background" key={"colour-section" + 1}>
                                 <Box id="colour-info" key={"colour-title" + 1} sx={{
@@ -161,15 +167,19 @@ const App = () => {
                                 >
                                     {
                                         Object.keys(values.colours["background" as PossibleKeys]).map((colour, index) => {
-                                            if (colour === "info") return
+                                            if (colour === "info" || colour === "type") return
                                             const colourGroup = values.colours.background
                                             return (
-                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursBG]} name={colour} /></Grid>
+                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}>
+                                                    <ColourTile colour={colourGroup[colour as PossibleColoursBG]} name={colour} />
+                                                </Grid>
                                             )
                                         })
                                     }
                                 </Grid>
                             </Box>
+
+
 
                             <Box id="colour-section-statuses" key={"colour-section" + 2}>
                                 <Box id="colour-info" key={"colour-title" + 2} sx={{
@@ -187,17 +197,56 @@ const App = () => {
                                 >
                                     {
                                         Object.keys(values.colours["statuses" as PossibleKeys]).map((colour, index) => {
-                                            if (colour === "info") return
+                                            if (colour === "info" || colour === "type") return
                                             const colourGroup = values.colours.statuses
                                             return (
-                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}><ColourTile colour={colourGroup[colour as PossibleColoursStatus]} name={colour} /></Grid>
+                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}>
+                                                    <ColourTile colour={colourGroup[colour as PossibleColoursStatus]} name={colour} />
+                                                </Grid>
+                                            )
+                                        })
+                                    }
+                                </Grid>
+                            </Box>
+
+
+                            <Box id="colour-section-gradients" key={"colour-section" + 3}>
+                                <Box id="colour-info" key={"colour-title" + 2} sx={{
+                                    fontSize: "20px",
+                                    marginTop: "20px"
+                                }}>{capitalise("gradients")}</Box>
+                                <Box id="colour-info" key={"colour-info" + 2} >{values.colours.gradients.info}</Box>
+                                <Grid
+                                    container
+                                    id="colour-tiles"
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "row"
+                                    }}
+                                >
+                                    {
+                                        Object.keys(values.colours["gradients" as PossibleKeys]).map((colour, index) => {
+                                            if (colour === "info" || colour === "type") return
+                                            const colourGroup = values.colours.gradients
+                                            return (
+                                                <Grid item key={"colour-group-" + index} sx={{ margin: "20px", marginLeft: "80px" }}>
+                                                    <GradientTile colour={colourGroup[colour as PossibleColoursGradient]} name={colour} />
+                                                </Grid>
                                             )
                                         })
                                     }
                                 </Grid>
                             </Box>
                         </Box>
+
+
+
+
                         <Box id="tab-body-text" sx={{ display: (selectedSection === "text" ? "flex" : "none") }} ></Box>
+
+
+
+
                         <Box id="tab-body-components" sx={{ display: (selectedSection === "components" ? "flex" : "none"), ...styles.tabBody, paddingTop: "0" }} >
                             <ToggleButtonGroup
                                 id="top-bar-2"

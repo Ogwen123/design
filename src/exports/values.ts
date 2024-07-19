@@ -2,6 +2,7 @@ export const values = {
     "colours": {
         "info": "Below is an outline of the colours to be used. These include the primary, background and status colours.",
         "primary": {
+            "type": "SINGLE",
             "info": "Pick one of the below to be the primary colour for the site. The primary colour should be used to colour components like buttons and forms. The dark version of each colour should be used for things like hover effects.",
             "teal": {
                 "main": "#009788",
@@ -21,6 +22,7 @@ export const values = {
             }
         },
         "background": {
+            "type": "SINGLE",
             "info": "The backgrund colours that should be used. The highlight colour should be used to seperate distinct sections of the site.",
             "dark": {
                 "main": "#22272e",
@@ -32,6 +34,7 @@ export const values = {
             }
         },
         "statuses": {
+            "type": "SINGLE",
             "info": "The status colours should be used to colour alerts. Also, the warning and danger colours can be used to colour buttons that a user should be careful about pressing.",
             "success": {
                 "main": "#27ea60",
@@ -44,6 +47,34 @@ export const values = {
             "danger": {
                 "main": "#c0392b",
                 "dark": "#9c2e22"
+            }
+        },
+        "gradients": {
+            "type": "GRADIENT",
+            "info": "Some good looking gradient options.",
+            "0": {
+                "from": "#2e3192",
+                "to": "#1bffff"
+            },
+            "1": {
+                "from": "#d4145a",
+                "to": "#fbb03b"
+            },
+            "2": {
+                "from": "#009245",
+                "to": "#fcee21"
+            },
+            "3": {
+                "from": "#662d8c",
+                "to": "#ed1e79"
+            },
+            "4": {
+                "from": "#d8b5ff",
+                "to": "#1eae98"
+            },
+            "5": {
+                "from": "#a390c6",
+                "to": "#197b6d"
             }
         }
     },
